@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Your Anime</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" />
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">Home</a>
+          
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/topAnimes">Top Animes</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/seasonsUpcoming">Upcoming</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/nowAiring">Now Airing</a>
+              </li>
+            </ul>
+            <form class="d-flex" role="search" action="/search" method="POST">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search" id="searchField">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+
+    <a href="/" class="btn btn-primary back-btn">Back to Anime List</a>
+    <h1><%= content.title %></h1>
+    
+    <div class="container">
+        <!-- Title and Details Section -->
+        <div class="section">
+            <p><strong>English Title:</strong> <%= content.title_english %></p>
+            <p><strong>Japanese Title:</strong> <%= content.title_japanese %></p>
+            <p><strong>Episodes:</strong> <%= content.episodes %></p>
+            <p><strong>Status:</strong> <%= content.status %></p>
+            <p><strong>Airing:</strong> <%= content.airing ? 'Yes' : 'No' %></p>
+            <p><strong>Duration:</strong> <%= content.duration %></p>
+            <p><strong>Rating:</strong> <%= content.rating %></p>
+            <p><strong>Score:</strong> <%= content.score !== null ? content.score : 'N/A' %></p>
+        </div>
+
+        <!-- Images Section -->
+        <div class="section">
+            <h3>Images</h3>
+            <% if (content.images && content.images.jpg) { %>
+                <img src="<%= content.images.jpg.large_image_url %>" alt="Anime Image">
+            <% } else { %>
+                <p>No images available</p>
+            <% } %>
+        </div>
+
+        <!-- Trailer Section -->
+        <div class="section">
+            <h3>Trailer</h3>
+            <% if (content.trailer && content.trailer.embed_url) { %>
+                <iframe src="<%= content.trailer.embed_url %>" frameborder="0" allowfullscreen></iframe>
+            <% } else { %>
+                <p>No trailer available</p>
+            <% } %>
+        </div>
+
+        <!-- Producers Section -->
+        <div class="section">
+            <h3>Producers</h3>
+            <ul>
+                <% if (Array.isArray(content.producers) && content.producers.length > 0) { %>
+                    <% content.producers.forEach(function(producer) { %>
+                        <li><a href="<%= producer.url %>"><%= producer.name %></a></li>
+                    <% }) %>
+                <% } else { %>
+                    <li>No producers available</li>
+                <% } %>
+            </ul>
+        </div>
+
+        <!-- Synopsis Section -->
+    <div class="row">
+        <div class="col-12">
+            <p class="synopsis"><strong>Synopsis:</strong> <%= content.synopsis %></p>
+        </div>
+    </div>
+
+        <!-- Genres Section -->
+        <div class="section">
+            <h3>Genres</h3>
+            <ul>
+                <% if (Array.isArray(content.genres) && content.genres.length > 0) { %>
+                    <% content.genres.forEach(function(genre) { %>
+                        <li><a href="<%= genre.url %>"><%= genre.name %></a></li>
+                    <% }) %>
+                <% } else { %>
+                    <li>No genres available</li>
+                <% } %>
+            </ul>
+        </div>
+
+        <!-- Themes Section -->
+        <div class="section">
+            <h3>Themes</h3>
+            <ul>
+                <% if (Array.isArray(content.themes) && content.themes.length > 0) { %>
+                    <% content.themes.forEach(function(theme) { %>
+                        <li><a href="<%= theme.url %>"><%= theme.name %></a></li>
+                    <% }) %>
+                <% } else { %>
+                    <li>No themes available</li>
+                <% } %>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
