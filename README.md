@@ -32,7 +32,7 @@ Anime Finder is a web application that allows users to search and view informati
 1. Clone the repository to your local machine:
 
    ```bash
-   git clone https://github.com/your-username/anime-finder.git
+   git clone https://github.com/Kerim6/animeFinder.git
    ```
 
 2. Navigate to the project directory:
@@ -52,7 +52,7 @@ Anime Finder is a web application that allows users to search and view informati
 1. Start the server:
 
    ```bash
-   node app.js
+   node index.js
    ```
 
 2. Open your browser and navigate to `http://localhost:3000` to access the application.
@@ -61,23 +61,12 @@ Anime Finder is a web application that allows users to search and view informati
 
 - `/`: Fetch and display all anime.
 - `/topAnimes`: View top-rated anime.
-- `/nowAiring`: View anime currently airing.
-- `/seasonsUpcoming`: View anime that are upcoming in the next seasons.
+- `/nowAiring`: View anime that is currently airing.
+- `/seasonsUpcoming`: View upcoming anime in the next seasons.
 - `/anime/:id`: View detailed information about a specific anime.
 - `/search`: Search for anime based on a keyword.
 
-## Screenshots
-
-_You can add some screenshots of your web app here for a better presentation._
 
 ## Contributing
 
 Feel free to submit pull requests to enhance the project or fix bugs.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-This README provides an overview of your project and the necessary steps to set it up and run it locally. You can modify it based on your specific needs.
