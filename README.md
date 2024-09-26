@@ -1,7 +1,3 @@
-Here’s a sample README file for your project:
-
----
-
 # Anime Finder
 
 Anime Finder is a web application that allows users to search and view information about anime using the [Jikan API](https://jikan.moe/). It provides features such as searching for anime, viewing top-rated anime, currently airing anime, upcoming seasons, and individual anime details.
