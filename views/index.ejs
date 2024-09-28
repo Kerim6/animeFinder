@@ -1,69 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Find Your Anime</title>
-    <link rel="stylesheet" href="/styles/main.css">
+    <meta charset="UTF-8"> <!-- Specifies the character encoding for the document -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Ensures the page is responsive and adjusts to the device width -->
+    <title>Find Your Anime</title> <!-- Sets the title of the webpage -->
+
+    <!-- Link to a custom CSS file for additional styles -->
+    <link rel="stylesheet" href="/styles/main.css"> 
+    
+    <!-- Link to Bootstrap 5 CSS for responsive layout and predefined styling -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
 </head>
-<body class="my-body">
+<body class="my-body"> <!-- Applies custom styling with the class "my-body" -->
+
+    <!-- Bootstrap Navbar for navigation across the site -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="/">Home</a>
+        <div class="container-fluid"> <!-- Ensures the navbar content is fluid across screen sizes -->
+          <a class="navbar-brand" href="/">Home</a> <!-- Home link to the homepage -->
           
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <!-- Unordered list for navigation items -->
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
+                <!-- Link to the "Top Animes" page -->
                 <a class="nav-link active" aria-current="page" href="/topAnimes">Top Animes</a>
               </li>
               <li class="nav-item">
+                <!-- Link to the "Upcoming Seasons" page -->
                 <a class="nav-link" href="/seasonsUpcoming">Upcoming</a>
               </li>
               <li class="nav-item">
+                <!-- Link to the "Now Airing" page -->
                 <a class="nav-link" href="/nowAiring">Now Airing</a>
               </li>
             </ul>
-            <form class="d-flex" role="search" action="/search" method="POST">
+
+            <!-- Search form for users to search for specific anime -->
+            <form class="d-flex" role="search" action="/search" method="POST"> 
+              <!-- Search input field -->
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search" id="searchField">
+              <!-- Submit button for search -->
               <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
           </div>
         </div>
-      </nav>
-  <div class="container mt-5">
-    <div class="row">
-        <% content.forEach(anime => { %>
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-4">
-                <!-- Wrap the card inside an anchor tag to make the whole card clickable -->
-                <a href="/anime/<%= anime.mal_id %>" class="text-decoration-none">
-                    <div class="card h-100 shadow-sm">
-                        
-                        <% if (anime.images && anime.images.jpg) { %>
-                            <img src="<%= anime.images.jpg.image_url %>" class="card-img-top" alt="<%= anime.title %>">
-                        <% }%>
-                        <div class="card-body">
-                            <h5 class="card-title"><%= anime.title %></h5>
-                            <p class="card-text">
-                                <strong>Type:</strong> <%= anime.type %><br>
-                                <strong>Episodes:</strong> <%= anime.episodes %><br>
-                                <strong>Score:</strong> <%= anime.score %> ⭐<br>
-                                <strong>Synopsis:</strong> <%= anime.synopsis ? anime.synopsis.substring(0, 100) + "..." : "No synopsis available." %><br>
-                                <strong>Studio:</strong> 
+    </nav>
+
+    <!-- Bootstrap container for the main content -->
+    <div class="container mt-5">
+        <!-- Bootstrap grid system for layout (row of anime cards) -->
+        <div class="row">
+            <!-- EJS loop through the "content" array to render each anime -->
+            <% content.forEach(anime => { %> 
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-4"> <!-- Responsive grid columns for different screen sizes -->
+                    <!-- Wrap each card in a clickable anchor tag that leads to the anime details page -->
+                    <a href="/anime/<%= anime.mal_id %>" class="text-decoration-none"> 
+                        <!-- Bootstrap card for displaying anime details -->
+                        <div class="card h-100 shadow-sm">
+                            <!-- Display anime image if it exists -->
+                            <% if (anime.images && anime.images.jpg) { %>
+                                <img src="<%= anime.images.jpg.image_url %>" class="card-img-top" alt="<%= anime.title %>"> <!-- Anime image -->
+                            <% }%>
+                            <div class="card-body">
+                                <!-- Display anime title -->
+                                <h5 class="card-title"><%= anime.title %></h5> 
+                                <!-- Display additional anime details -->
+                                <p class="card-text">
+                                    <strong>Type:</strong> <%= anime.type %><br> <!-- Anime type (TV, Movie, OVA, etc.) -->
+                                    <strong>Episodes:</strong> <%= anime.episodes %><br> <!-- Number of episodes -->
+                                    <strong>Score:</strong> <%= anime.score %> ⭐<br> <!-- User score rating with a star icon -->
+                                    <!-- Display synopsis (shortened to 100 characters if available) -->
+                                    <strong>Synopsis:</strong> <%= anime.synopsis ? anime.synopsis.substring(0, 100) + "..." : "No synopsis available." %><br>
+                                    <strong>Studio:</strong> 
+                                    <!-- Display the first studio name if available, otherwise a fallback message -->
                                     <% if (anime.studios && anime.studios.length > 0) { %>
                                         <%= anime.studios[0].name %>
                                     <% } else { %>
                                         No studio information available.
                                     <% } %>
-                            </p>
+                                </p>
+                            </div>
                         </div>
-                    </div>
-                </a>
-            </div>
-        <% }) %>
+                    </a>
+                </div>
+            <% }) %> <!-- End of EJS loop -->
+        </div>
     </div>
-</div>
-
 
 </body>
 </html>
